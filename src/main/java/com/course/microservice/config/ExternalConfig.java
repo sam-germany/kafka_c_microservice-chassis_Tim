@@ -28,7 +28,7 @@ microservice.yml
 
 Note in our example above   "file:./conf/microservice.yml",   <-- by this way the microservice.yml file is called
 (2)
-factory = YamlPropertySourceFactory.class  <-- the main logic of retriving these key-value is written in the
+factory = YamlPropertySourceFactory.class  <-- the main logic of retreiving these key-value is written in the
                                                 YamlPropertySourceFactory class
 
 (3)

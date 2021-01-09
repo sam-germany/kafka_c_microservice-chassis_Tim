@@ -1,7 +1,8 @@
 package com.course.microservice.api.server.chassis;
 
-import java.util.concurrent.ThreadLocalRandom;
-
+import com.course.microservice.api.response.PlainMessage;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
@@ -10,14 +11,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.course.microservice.api.response.PlainMessage;
-
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.concurrent.ThreadLocalRandom;
 
 @RestController
 @RequestMapping("/api/chassis")
-@Tag(name = "Log API", description = "Microservice chassis sample log API.")
+@Tag(name = "Log API", description = "Microservice chassis sample log API--------.")
 public class LogApi {
 
 	private static final Logger LOG = LoggerFactory.getLogger(LogApi.class);
@@ -43,5 +41,10 @@ public class LogApi {
 
 		return ResponseEntity.ok().body(response);
 	}
-
 }
+/*
+@Tag()   <-- this is for the swagger Documentation
+@Operation()   <-- this is for  swagger Documentation
+
+
+ */

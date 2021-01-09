@@ -1,8 +1,14 @@
 package com.course.microservice.api.server.chassis;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-
+import com.course.microservice.api.response.PlainMessage;
+import com.course.microservice.exception.BadInputRequestException;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -14,16 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.course.microservice.api.response.PlainMessage;
-import com.course.microservice.exception.BadInputRequestException;
-
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.ExampleObject;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.tags.Tag;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 
 @RestController
 @RequestMapping("/api/chassis/exception")
@@ -33,15 +31,17 @@ public class ExceptionApi {
 	private static final Logger LOG = LoggerFactory.getLogger(Exception.class);
 
 	@GetMapping(value = "/global", produces = MediaType.APPLICATION_JSON_VALUE)
-	@Operation(summary = "Sample exception API", description = "<p>This sample exception API will throw exception "
-			+ "if the input parameter is invalid.</p>")
+	@Operation(summary = "Sample exception API", description = "<p>This sample exception API will throw exception if the input parameter is invalid.</p>")
+
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Show parameter values"),
+
 			@ApiResponse(responseCode = "400", description = "If <code>param_one</code> or <code>param_two</code> is invalid.", content = {
-					@Content(examples = { @ExampleObject(value = "{\r\n" + "    \"message\": \"string\",\r\n"
-							+ "    \"reccomendation\": \"string\"\r\n" + "}") }, mediaType = "application/json") }),
+					@Content(examples = { @ExampleObject(value = "{\r\n" + "    \"message\": \"string\",\r\n" + "  \"reccomendation\": \"string\"\r\n" + "}") }, mediaType = "application/json") }),
+
 			@ApiResponse(responseCode = "500", description = "If <code>use_file</code> is <code>true</code>.", content = {
-					@Content(examples = { @ExampleObject(value = "{\r\n" + "    \"message\": \"string\",\r\n"
-							+ "    \"reccomendation\": \"string\"\r\n" + "}") }, mediaType = "application/json") }) })
+					@Content(examples = { @ExampleObject(value = "{\r\n" + "    \"message\": \"string\",\r\n" + "    \"reccomendation\": \"string\"\r\n" + "}") }, mediaType = "application/json") })
+	 })
+
 	public ResponseEntity<PlainMessage> demoExceptionGlobal(
 			@RequestParam(name = "param_one") @Parameter(description = "Must be numeric.", example = "1526", required = false) String paramOne,
 			@RequestParam(name = "param_two") @Parameter(description = "Maximum length is 5 characters.", example = "A5b9c", required = false) String paramTwo,
@@ -69,13 +69,15 @@ public class ExceptionApi {
 		return ResponseEntity.ok().body(response);
 	}
 
+
 	@GetMapping(value = "/response", produces = MediaType.APPLICATION_JSON_VALUE)
-	@Operation(summary = "Sample exception API", description = "<p>This sample exception API will throw exception "
-			+ "if the input parameter is invalid.</p>")
+	@Operation(summary = "Sample exception API", description = "<p>This sample exception API will throw exception if the input parameter is invalid.</p>")
+
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Show parameter values"),
+
 			@ApiResponse(responseCode = "400", description = "If <code>param_one</code> is invalid.", content = {
-					@Content(examples = { @ExampleObject(value = "{\r\n" + "    \"message\": \"string\",\r\n"
-							+ "    \"reccomendation\": \"string\"\r\n" + "}") }, mediaType = "application/json") }) })
+					@Content(examples = { @ExampleObject(value = "{\r\n" + "    \"message\": \"string\",\r\n  \"recommendation\": \"string\"\r\n" + "}") }, mediaType = "application/json") })
+	})
 	public ResponseEntity<PlainMessage> demoExceptionResponse(
 			@RequestParam(name = "param_one") @Parameter(description = "Valid when value is started with <code>mivroservice</code>.", example = "microserviceXYZ", required = false) String paramOne) {
 		// need specific prefix
