@@ -33,13 +33,14 @@ public class ExceptionApi {
 	@GetMapping(value = "/global", produces = MediaType.APPLICATION_JSON_VALUE)
 	@Operation(summary = "Sample exception API", description = "<p>This sample exception API will throw exception if the input parameter is invalid.</p>")
 
-	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Show parameter values-"),
+	@ApiResponses(value = {
+	   @ApiResponse(responseCode = "200", description = "Show parameter values-"),
 
-	@ApiResponse(responseCode = "400", description = "If <code>param_one</code> or <code>param_two</code> is invalid.", content = {
-	 	@Content(examples = { @ExampleObject(value = "{\r\n" + "\" message \":\"string\",\r\n" + "  \"recommendation------\": \"string\"\r\n" + "}") }, mediaType = "application/json") }),
+   	   @ApiResponse(responseCode = "400", description = "If <code>param_one</code> or <code>param_two</code> is invalid.", content = {
+	 	  @Content(examples = { @ExampleObject(value = "{\r\n" + "\" message \":\"string\",\r\n" + "  \"recommendation\": \"string\"\r\n" + "}") }, mediaType = "application/json") }),
 
-	@ApiResponse(responseCode = "500", description = "If <code>use_file</code> is <code>true</code>.", content = {
-		@Content(examples = { @ExampleObject(value = "{\r\n" + "    \"message\": \"string\",\r\n" + "    \"recommendation......\": \"string\"\r\n" + "}") }, mediaType = "application/json") })
+	   @ApiResponse(responseCode = "500", description = "If <code>use_file</code> is <code>true</code>.", content = {
+		  @Content(examples = { @ExampleObject(value = "{\r\n" + "    \"message\": \"string\",\r\n" + "    \"recommendation\": \"string\"\r\n" + "}") }, mediaType = "application/json") })
 	 })
 	public ResponseEntity<PlainMessage> demoExceptionGlobal(
 		@RequestParam(name = "param_one") @Parameter(description = "Must be numeric.", example = "1526", required = false) String paramOne22,
@@ -74,11 +75,11 @@ public class ExceptionApi {
 
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Show parameter values"),
 
- 	@ApiResponse(responseCode = "400", description = "If <code>param_one</code> is invalid----.", content = {
-		@Content(examples = { @ExampleObject(value = "{\r\n" + "    \"message------\": \"string\",\r\n  \"recommendation-----\": \"string\"\r\n" + "}") }, mediaType = "application/json") })
+ 	@ApiResponse(responseCode = "400", description = "If <code>param_one</code> is invalid.", content = {
+		@Content(examples = { @ExampleObject(value = "{\r\n" + "    \"message\": \"string\",\r\n  \"recommendation\": \"string\"\r\n" + "}") }, mediaType = "application/json") })
 	})
 	public ResponseEntity<PlainMessage> demoExceptionResponse( @RequestParam(name = "param_one")
-																   @Parameter(description = "Valid when value is started with <code>microservice</code>######.",
+																   @Parameter(description = "Valid when value is started with <code>microservice</code>.",
 			                                                                              example = "microserviceXYZ", required = true) String paramOne) {
 
 		// need specific prefix

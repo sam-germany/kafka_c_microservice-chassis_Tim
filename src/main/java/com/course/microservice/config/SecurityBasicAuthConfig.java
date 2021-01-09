@@ -15,25 +15,50 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 @Configuration
 @EnableWebSecurity
 public class SecurityBasicAuthConfig extends WebSecurityConfigurerAdapter {
-
 	@Autowired
 	private AuthenticationEntryPoint authEntryPoint;
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable().authorizeRequests().antMatchers("/api/chassis/security/basic_auth/*").authenticated()
-				.anyRequest().permitAll().and().httpBasic().authenticationEntryPoint(authEntryPoint).and()
-				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+         		http.csrf()
+					.disable()
+					.authorizeRequests()
+					.antMatchers("/api/chassis/security/basic_auth/*").authenticated()
+			    	.anyRequest().permitAll()
+					.and()
+					.httpBasic().authenticationEntryPoint(authEntryPoint)
+	   			    .and()
+				    .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 	}
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication().withUser("admin").password(encoder().encode("password")).roles("ADMIN");
-		auth.inMemoryAuthentication().withUser("spiderman").password(encoder().encode("spidey")).roles("SUPERHERO");
+		            auth.inMemoryAuthentication()
+					    .withUser("admin")
+					    .password(encoder().encode("password"))
+					    .roles("ADMIN");
+
+		            auth.inMemoryAuthentication()
+						.withUser("spiderman")
+						.password(encoder().encode("spidey"))
+						.roles("SUPERHERO");
 	}
 
 	@Bean
 	public PasswordEncoder encoder() {
+
 		return new BCryptPasswordEncoder();
 	}
 }
+/*(1)
+  .antMatchers("/api/chassis/security/basic_auth/*").authenticated()   <-- line 27  any request comes from this
+url should be authenticated, But for the choosing which user should be successfully authenticated and which
+user should not be allowed we need to define this in the entry point
+
+  ".httpBasic().authenticationEntryPoint(authEntryPoint)"  here we are defining that the user should use the
+ defined username-password
+
+
+
+
+ */
