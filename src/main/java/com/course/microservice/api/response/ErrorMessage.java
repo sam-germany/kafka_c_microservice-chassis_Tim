@@ -4,31 +4,31 @@ public class ErrorMessage {
 
 	private String message;
 
-	private String reccomendation;
+	private String recommendation;
 
 	public ErrorMessage() {
 
 	}
 
-	public ErrorMessage(String message, String reccomendation) {
+	public ErrorMessage(String message, String recommendation) {
 		super();
 		this.message = message;
-		this.reccomendation = reccomendation;
+		this.recommendation = recommendation;
 	}
 
 	public String getMessage() {
 		return message;
 	}
 
-	public String getReccomendation() {
-		return reccomendation;
+	public String getRecommendation() {
+		return recommendation;
 	}
 
 	public void setMessage(String message) {
 		this.message = message;
 	}
 
-	public void setReccomendation(String reccomendation) {
-		this.reccomendation = reccomendation;
+	public void setRecommendation(String recommendation) {
+		this.recommendation = recommendation;
 	}
 }

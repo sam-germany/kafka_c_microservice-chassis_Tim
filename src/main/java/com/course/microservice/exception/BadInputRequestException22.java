@@ -1,10 +1,11 @@
 package com.course.microservice.exception;
 
-public class BadInputRequestException extends RuntimeException {
+public class BadInputRequestException22 extends RuntimeException {
 
 	private static final long serialVersionUID = 5820918555350604651L;
 
-	public BadInputRequestException(String message) {
+	public BadInputRequestException22(String message) {
+
 		super(message);
 	}
 

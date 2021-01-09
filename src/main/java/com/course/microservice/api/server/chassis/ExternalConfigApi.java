@@ -21,11 +21,12 @@ public class ExternalConfigApi {
 	private String title;
 
 	@GetMapping(value = "/title", produces = MediaType.APPLICATION_JSON_VALUE)
-	@Operation(summary = "Get title", description = "Get title from external configuration, "
-			+ "or get default title if no external configuration defined.")
+	@Operation(summary = "Get title", description = "Get title from external configuration, or get default title if no external configuration defined.")
 	public ResponseEntity<PlainMessage> demoTitle() {
+
 		var response = new PlainMessage(title);
 		return ResponseEntity.ok().body(response);
+
 	}
 
 }
